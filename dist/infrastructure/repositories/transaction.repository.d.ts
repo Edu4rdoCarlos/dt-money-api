@@ -1,15 +1,11 @@
 import { PrismaService } from "../prisma/prisma.service";
-import { Transaction, TransactionType } from "../../domain/transaction.entity";
-import { ITransactionRepository } from "../../domain/interfaces/transaction-repository.interfaces";
-export declare class TransactionRepository implements ITransactionRepository {
+import { Transaction } from "../../domain/transaction.entity";
+import { ICreateTransactionDTO } from "src/application/dto/create-transaction.dto";
+import { IGetTransactionDTO } from "src/application/dto/get-transaction.dto";
+export declare class TransactionRepository {
     private prisma;
     constructor(prisma: PrismaService);
-    create(data: {
-        title: string;
-        date: Date;
-        value: number;
-        type: TransactionType;
-        categoryId: string;
-    }): Promise<Transaction>;
+    create(data: ICreateTransactionDTO): Promise<Transaction>;
     findAll(): Promise<Transaction[]>;
+    findById(data: IGetTransactionDTO): Promise<Transaction>;
 }

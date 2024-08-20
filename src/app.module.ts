@@ -1,21 +1,15 @@
 import { Module } from "@nestjs/common";
-import { TransactionRepository } from "./infrastructure/repositories/transaction.repository";
 import { TransactionController } from "./interface-adapters/controllers/transaction.controller";
 import { PrismaService } from "./infrastructure/prisma/prisma.service";
-
-import { TransactionService } from "./interface-adapters/service/transaction.service";
+import { TransactionRepository } from "./infrastructure/repositories/transaction.repository";
 import { CreateTransactionUseCase } from "./application/usecase/transaction/create-transaction.usecase";
 import { GetAllTransactionsUseCase } from "./application/usecase/transaction/get-all-transactions.usecase";
+import { GetTransactionsUseCase } from "./application/usecase/transaction/get-transaction.usecase";
+import { TransactionService } from "./interface-adapters/service/transaction.service";
 
 @Module({
   imports: [],
   controllers: [TransactionController],
-  providers: [
-    TransactionService,
-    TransactionRepository,
-    PrismaService,
-    CreateTransactionUseCase,
-    GetAllTransactionsUseCase,
-  ],
+  providers: [PrismaService, TransactionRepository, TransactionService],
 })
 export class AppModule {}

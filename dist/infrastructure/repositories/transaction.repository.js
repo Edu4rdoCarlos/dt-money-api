@@ -45,6 +45,15 @@ let TransactionRepository = class TransactionRepository {
             return new transaction_entity_1.Transaction(transaction.id, transaction.title, transaction.date, transaction.value, transaction.type, new category_entity_1.Category(category.id, category.name));
         }));
     }
+    async findById(data) {
+        const transaction = await this.prisma.transaction.findUnique({
+            where: { id: data.id },
+        });
+        const category = await this.prisma.category.findUnique({
+            where: { id: transaction.categoryId },
+        });
+        return new transaction_entity_1.Transaction(transaction.id, transaction.title, transaction.date, transaction.value, transaction.type, new category_entity_1.Category(category.id, category.name));
+    }
 };
 exports.TransactionRepository = TransactionRepository;
 exports.TransactionRepository = TransactionRepository = __decorate([
