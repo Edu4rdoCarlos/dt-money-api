@@ -14,17 +14,16 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TransactionController = void 0;
 const common_1 = require("@nestjs/common");
-const transaction_usecase_1 = require("../../application/usecase/transaction.usecase");
+const transaction_service_1 = require("../service/transaction.service");
 let TransactionController = class TransactionController {
-    constructor(createTransactionUseCase, getAllTransactionsUseCase) {
-        this.createTransactionUseCase = createTransactionUseCase;
-        this.getAllTransactionsUseCase = getAllTransactionsUseCase;
+    constructor(transactionService) {
+        this.transactionService = transactionService;
     }
     async create(createTransactionDTO) {
-        return this.createTransactionUseCase.execute(createTransactionDTO);
+        return this.transactionService.createTransaction(createTransactionDTO);
     }
     async findAll() {
-        return this.getAllTransactionsUseCase.execute();
+        return this.transactionService.getAllTransactions();
     }
 };
 exports.TransactionController = TransactionController;
@@ -42,8 +41,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], TransactionController.prototype, "findAll", null);
 exports.TransactionController = TransactionController = __decorate([
-    (0, common_1.Controller)('transactions'),
-    __metadata("design:paramtypes", [transaction_usecase_1.CreateTransactionUseCase,
-        transaction_usecase_1.GetAllTransactionsUseCase])
+    (0, common_1.Controller)("transactions"),
+    __metadata("design:paramtypes", [transaction_service_1.TransactionService])
 ], TransactionController);
 //# sourceMappingURL=transaction.controller.js.map

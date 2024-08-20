@@ -1,11 +1,11 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from '../prisma/prisma.service';
-import { Transaction, TransactionType } from '../../domain/transaction.entity';
-import { Category } from '../../domain/category.entity';
-import { TransactionRepository } from '../../domain/interfaces/transaction-repository.interfaces';
+import { Injectable, NotFoundException } from "@nestjs/common";
+import { PrismaService } from "../prisma/prisma.service";
+import { Transaction, TransactionType } from "../../domain/transaction.entity";
+import { Category } from "../../domain/category.entity";
+import { ITransactionRepository } from "../../domain/interfaces/transaction-repository.interfaces";
 
 @Injectable()
-export class PrismaTransactionRepository implements TransactionRepository {
+export class PrismaTransactionRepository implements ITransactionRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: {
@@ -21,7 +21,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
 
     if (!category) {
       throw new NotFoundException(
-        `Category with id ${data.categoryId} not found`,
+        `Category with id ${data.categoryId} not found`
       );
     }
 
@@ -41,7 +41,7 @@ export class PrismaTransactionRepository implements TransactionRepository {
       createdData.date,
       createdData.value,
       createdData.type,
-      new Category(category.id, category.name),
+      new Category(category.id, category.name)
     );
   }
 
@@ -60,9 +60,9 @@ export class PrismaTransactionRepository implements TransactionRepository {
           transaction.date,
           transaction.value,
           transaction.type,
-          new Category(category.id, category.name),
+          new Category(category.id, category.name)
         );
-      }),
+      })
     );
   }
 }

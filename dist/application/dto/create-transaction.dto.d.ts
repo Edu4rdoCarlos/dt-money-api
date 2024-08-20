@@ -1,5 +1,5 @@
-import { TransactionType } from 'src/domain/transaction.entity';
-export interface CreateTransactionDTO {
+import { TransactionType } from "src/domain/transaction.entity";
+export interface ICreateTransactionDTO {
     title: string;
     date: Date;
     value: number;

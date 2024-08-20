@@ -1,6 +1,6 @@
-import { Transaction, TransactionType } from '../transaction.entity';
+import { Transaction, TransactionType } from "../transaction.entity";
 
-export interface TransactionRepository {
+export interface ITransactionRepository {
   create(data: {
     title: string;
     date: Date;

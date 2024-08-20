@@ -1,9 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { ICreateTransactionDTO } from "src/application/dto/create-transaction.dto";
-import {
-  CreateTransactionUseCase,
-  GetAllTransactionsUseCase,
-} from "src/application/usecase/transaction.usecase";
+import { CreateTransactionUseCase } from "src/application/usecase/transaction/create-transaction.usecase";
+import { GetAllTransactionsUseCase } from "src/application/usecase/transaction/get-all-transactions.usecase";
+
 import { Transaction } from "src/domain/transaction.entity";
 
 @Injectable()
