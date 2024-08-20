@@ -5,7 +5,7 @@ import { Category } from "../../domain/category.entity";
 import { ITransactionRepository } from "../../domain/interfaces/transaction-repository.interfaces";
 
 @Injectable()
-export class PrismaTransactionRepository implements ITransactionRepository {
+export class TransactionRepository implements ITransactionRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: {

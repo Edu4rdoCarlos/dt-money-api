@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { PrismaTransactionRepository } from "./infrastructure/repositories/transaction.repository";
+import { TransactionRepository } from "./infrastructure/repositories/transaction.repository";
 import { TransactionController } from "./interface-adapters/controllers/transaction.controller";
 import { PrismaService } from "./infrastructure/prisma/prisma.service";
 
@@ -12,10 +12,10 @@ import { GetAllTransactionsUseCase } from "./application/usecase/transaction/get
   controllers: [TransactionController],
   providers: [
     TransactionService,
+    TransactionRepository,
+    PrismaService,
     CreateTransactionUseCase,
     GetAllTransactionsUseCase,
-    PrismaTransactionRepository,
-    PrismaService,
   ],
 })
 export class AppModule {}

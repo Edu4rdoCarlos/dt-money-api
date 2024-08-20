@@ -9,12 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PrismaTransactionRepository = void 0;
+exports.TransactionRepository = void 0;
 const common_1 = require("@nestjs/common");
 const prisma_service_1 = require("../prisma/prisma.service");
 const transaction_entity_1 = require("../../domain/transaction.entity");
 const category_entity_1 = require("../../domain/category.entity");
-let PrismaTransactionRepository = class PrismaTransactionRepository {
+let TransactionRepository = class TransactionRepository {
     constructor(prisma) {
         this.prisma = prisma;
     }
@@ -46,9 +46,9 @@ let PrismaTransactionRepository = class PrismaTransactionRepository {
         }));
     }
 };
-exports.PrismaTransactionRepository = PrismaTransactionRepository;
-exports.PrismaTransactionRepository = PrismaTransactionRepository = __decorate([
+exports.TransactionRepository = TransactionRepository;
+exports.TransactionRepository = TransactionRepository = __decorate([
     (0, common_1.Injectable)(),
     __metadata("design:paramtypes", [prisma_service_1.PrismaService])
-], PrismaTransactionRepository);
+], TransactionRepository);
 //# sourceMappingURL=transaction.repository.js.map

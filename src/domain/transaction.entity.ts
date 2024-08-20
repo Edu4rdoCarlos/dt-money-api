@@ -1,8 +1,8 @@
-import { Category } from './category.entity';
+import { Category } from "./category.entity";
 
 export enum TransactionType {
-  INCOME = 'income',
-  OUTCOME = 'outcome',
+  INCOME = "income",
+  OUTCOME = "outcome",
 }
 
 export class Transaction {
@@ -11,8 +11,8 @@ export class Transaction {
     private title: string,
     private date: Date,
     private value: number,
-    private type: 'income' | 'outcome',
-    private category: Category,
+    private type: "income" | "outcome",
+    private category: Category
   ) {}
 
   public getId(): string {
@@ -47,11 +47,11 @@ export class Transaction {
     this.value = value;
   }
 
-  public getType(): 'income' | 'outcome' {
+  public getType(): "income" | "outcome" {
     return this.type;
   }
 
-  public setType(type: 'income' | 'outcome'): void {
+  public setType(type: "income" | "outcome"): void {
     this.type = type;
   }
 

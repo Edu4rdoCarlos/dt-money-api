@@ -23,10 +23,10 @@ exports.AppModule = AppModule = __decorate([
         controllers: [transaction_controller_1.TransactionController],
         providers: [
             transaction_service_1.TransactionService,
+            transaction_repository_1.TransactionRepository,
+            prisma_service_1.PrismaService,
             create_transaction_usecase_1.CreateTransactionUseCase,
             get_all_transactions_usecase_1.GetAllTransactionsUseCase,
-            transaction_repository_1.PrismaTransactionRepository,
-            prisma_service_1.PrismaService,
         ],
     })
 ], AppModule);
