@@ -1,27 +1,21 @@
-import { Controller, Post, Body, Get } from '@nestjs/common';
-import { CreateTransactionDTO } from 'src/application/dto/create-transaction.dto';
-import {
-  CreateTransactionUseCase,
-  GetAllTransactionsUseCase,
-} from 'src/application/usecase/transaction.usecase';
-import { Transaction } from 'src/domain/transaction.entity';
+import { Controller, Post, Body, Get } from "@nestjs/common";
+import { ICreateTransactionDTO } from "src/application/dto/create-transaction.dto";
+import { Transaction } from "src/domain/transaction.entity";
+import { TransactionService } from "../service/transaction.service";
 
-@Controller('transactions')
+@Controller("transactions")
 export class TransactionController {
-  constructor(
-    private createTransactionUseCase: CreateTransactionUseCase,
-    private getAllTransactionsUseCase: GetAllTransactionsUseCase,
-  ) {}
+  constructor(private readonly transactionService: TransactionService) {}
 
   @Post()
   async create(
-    @Body() createTransactionDTO: CreateTransactionDTO,
+    @Body() createTransactionDTO: ICreateTransactionDTO
   ): Promise<Transaction> {
-    return this.createTransactionUseCase.execute(createTransactionDTO);
+    return this.transactionService.createTransaction(createTransactionDTO);
   }
 
   @Get()
   async findAll(): Promise<Transaction[]> {
-    return this.getAllTransactionsUseCase.execute();
+    return this.transactionService.getAllTransactions();
   }
 }
