@@ -30,9 +30,9 @@ export class TransactionService {
     return this.transactionRepository.findById(getTransactionDTO);
   }
 
-  // async getTransaction(
+  // async deleteTransaction(
   //   getTransactionDTO: IGetTransactionDTO
   // ): Promise<Transaction> {
-  //   return this.getTransactionUseCase.execute(getTransactionDTO);
+  //   return this.transactionRepository.delete(getTransactionDTO);
   // }
 }

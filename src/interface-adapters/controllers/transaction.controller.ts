@@ -5,16 +5,18 @@ import { TransactionService } from "../service/transaction.service";
 import { IGetTransactionDTO } from "src/application/dto/get-transaction.dto";
 import { IDeleteTransactionDTO } from "src/application/dto/delete-transaction.dto";
 
-@Controller("transactions")
+@Controller("api/transactions")
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  // @Post()
-  // async create(
-  //   @Body() createTransactionDTO: ICreateTransactionDTO
-  // ): Promise<Transaction> {
-  //   return this.transactionService.createTransaction(createTransactionDTO);
-  // }
+  @Post()
+  async create(
+    @Body() createTransactionDTO: ICreateTransactionDTO
+  ): Promise<Transaction> {
+    console.log("data", createTransactionDTO);
+
+    return this.transactionService.createTransaction(createTransactionDTO);
+  }
 
   @Get()
   async findAll(): Promise<Transaction[]> {

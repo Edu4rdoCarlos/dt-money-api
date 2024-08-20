@@ -25,7 +25,7 @@ export class TransactionRepository {
       data: {
         title: data.title,
         value: data.value,
-        date: data.date,
+        date: new Date(),
         type: data.type,
         categoryId: data.categoryId,
       },
