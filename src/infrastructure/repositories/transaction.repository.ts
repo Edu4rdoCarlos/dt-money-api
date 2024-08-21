@@ -2,9 +2,10 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { Transaction } from "../../domain/transaction.entity";
 import { Category } from "../../domain/category.entity";
-import { ITransactionRepository } from "../../domain/interfaces/transaction-repository.interfaces";
 import { ICreateTransactionDTO } from "src/application/dto/create-transaction.dto";
 import { IGetTransactionDTO } from "src/application/dto/get-transaction.dto";
+import { IDeleteTransactionDTO } from "src/application/dto/delete-transaction.dto";
+import { IUpdateTransactionDTO } from "src/application/dto/update-transaction.dto";
 
 @Injectable()
 export class TransactionRepository {
@@ -25,7 +26,8 @@ export class TransactionRepository {
       data: {
         title: data.title,
         value: data.value,
-        date: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         type: data.type,
         categoryId: data.categoryId,
       },
@@ -34,7 +36,8 @@ export class TransactionRepository {
     return new Transaction(
       createdData.id,
       createdData.title,
-      createdData.date,
+      createdData.createdAt,
+      createdData.updatedAt,
       createdData.value,
       createdData.type,
       new Category(category.id, category.name)
@@ -53,7 +56,8 @@ export class TransactionRepository {
         return new Transaction(
           transaction.id,
           transaction.title,
-          transaction.date,
+          transaction.createdAt,
+          transaction.updatedAt,
           transaction.value,
           transaction.type,
           new Category(category.id, category.name)
@@ -74,9 +78,56 @@ export class TransactionRepository {
     return new Transaction(
       transaction.id,
       transaction.title,
-      transaction.date,
+      transaction.createdAt,
+      transaction.updatedAt,
       transaction.value,
       transaction.type,
+      new Category(category.id, category.name)
+    );
+  }
+
+  async delete(id: string): Promise<boolean> {
+    try {
+      await this.prisma.transaction.delete({
+        where: { id },
+      });
+
+      return true;
+    } catch (error) {
+      console.error("Error deleting transaction:", error);
+      return false;
+    }
+  }
+
+  async update(id: string, data: IUpdateTransactionDTO): Promise<Transaction> {
+    const oldTransaction = await this.prisma.transaction.findUnique({
+      where: { id },
+    });
+
+    const updatedData = await this.prisma.transaction.update({
+      where: {
+        id,
+      },
+      data: {
+        title: data.title || oldTransaction.title,
+        value: data.value || oldTransaction.value,
+        updatedAt: new Date(),
+        type: data.type || oldTransaction.type,
+        categoryId: data.categoryId || oldTransaction.categoryId,
+      },
+    });
+
+    const category = await this.prisma.category.findUnique({
+      where: { id: updatedData.categoryId },
+    });
+
+    return new Transaction(
+      updatedData.id,
+      updatedData.title,
+      updatedData.createdAt,
+      updatedData.updatedAt,
+      updatedData.value,
+      updatedData.type,
       new Category(category.id, category.name)
     );
   }

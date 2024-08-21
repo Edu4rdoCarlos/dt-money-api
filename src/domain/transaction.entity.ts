@@ -9,7 +9,8 @@ export class Transaction {
   constructor(
     private id: string,
     private title: string,
-    private date: Date,
+    private createdAt: Date,
+    private updatedAt: Date,
     private value: number,
     private type: "income" | "outcome",
     private category: Category
@@ -31,12 +32,20 @@ export class Transaction {
     this.title = title;
   }
 
-  public getDate(): Date {
-    return this.date;
+  public getCreatedAt(): Date {
+    return this.createdAt;
   }
 
-  public setDate(date: Date): void {
-    this.date = date;
+  public setCreatedAt(date: Date): void {
+    this.createdAt = date;
+  }
+
+  public getUpdated(): Date {
+    return this.updatedAt;
+  }
+
+  public setUpdated(date: Date): void {
+    this.updatedAt = date;
   }
 
   public getValue(): number {

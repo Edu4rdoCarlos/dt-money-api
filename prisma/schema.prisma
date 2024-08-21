@@ -8,19 +8,20 @@ generator client {
 }
 
 model Transaction {
-  id         String   @id @default(uuid())
-  title      String
-  date       DateTime
-  value      Float
-  type       TransactionType
-  category   Category @relation(fields: [categoryId], references: [id])
-  categoryId String @unique
+  id          String   @id @default(uuid())
+  title       String
+  createdAt   DateTime
+  updatedAt   DateTime
+  value       Float
+  type        TransactionType
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String 
 }
 
 model Category {
   id       String    @id @default(uuid())
   name     String
-  transaction Transaction?
+  transaction Transaction[]
 }
 
 enum TransactionType {
