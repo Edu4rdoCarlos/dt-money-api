@@ -1,8 +1,7 @@
 import { Injectable } from "@nestjs/common";
-import { ICreateTransactionDTO } from "src/application/dto/create-transaction.dto";
-import { IDeleteTransactionDTO } from "src/application/dto/delete-transaction.dto";
-import { IGetTransactionDTO } from "src/application/dto/get-transaction.dto";
-import { IUpdateTransactionDTO } from "src/application/dto/update-transaction.dto";
+import { ICreateTransactionDTO } from "src/application/dto/transaction/create-transaction.dto";
+import { IGetTransactionDTO } from "src/application/dto/transaction/get-transaction.dto";
+import { IUpdateTransactionDTO } from "src/application/dto/transaction/update-transaction.dto";
 
 import { Transaction } from "src/domain/transaction.entity";
 import { TransactionRepository } from "src/infrastructure/repositories/transaction.repository";

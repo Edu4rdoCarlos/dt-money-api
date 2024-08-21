@@ -2,13 +2,13 @@ import { Injectable, NotFoundException } from "@nestjs/common";
 import { PrismaService } from "../prisma/prisma.service";
 import { Transaction } from "../../domain/transaction.entity";
 import { Category } from "../../domain/category.entity";
-import { ICreateTransactionDTO } from "src/application/dto/create-transaction.dto";
-import { IGetTransactionDTO } from "src/application/dto/get-transaction.dto";
-import { IDeleteTransactionDTO } from "src/application/dto/delete-transaction.dto";
-import { IUpdateTransactionDTO } from "src/application/dto/update-transaction.dto";
+import { IGetTransactionDTO } from "src/application/dto/transaction/get-transaction.dto";
+import { IUpdateTransactionDTO } from "src/application/dto/transaction/update-transaction.dto";
+import { ICreateTransactionDTO } from "src/application/dto/transaction/create-transaction.dto";
+import { ITransactionRepository } from "src/domain/interfaces/transaction-repository.interfaces";
 
 @Injectable()
-export class TransactionRepository {
+export class TransactionRepository implements ITransactionRepository {
   constructor(private prisma: PrismaService) {}
 
   async create(data: ICreateTransactionDTO): Promise<Transaction> {

@@ -1,13 +1,12 @@
-import { IGetTransactionDTO } from "src/application/dto/get-transaction.dto";
+import { IGetTransactionDTO } from "src/application/dto/transaction/get-transaction.dto";
 import { Transaction } from "../transaction.entity";
-import { ICreateTransactionDTO } from "src/application/dto/create-transaction.dto";
-import { IDeleteTransactionDTO } from "src/application/dto/delete-transaction.dto";
-import { IUpdateTransactionDTO } from "src/application/dto/update-transaction.dto";
+import { IUpdateTransactionDTO } from "src/application/dto/transaction/update-transaction.dto";
+import { ICreateTransactionDTO } from "src/application/dto/transaction/create-transaction.dto";
 
 export interface ITransactionRepository {
   create(data: ICreateTransactionDTO): Promise<Transaction>;
   findAll(): Promise<Transaction[]>;
   findById(data: IGetTransactionDTO): Promise<Transaction>;
-  delete(data: IDeleteTransactionDTO): Promise<boolean>;
-  update(data: IUpdateTransactionDTO): Promise<Transaction>;
+  delete(id: string): Promise<boolean>;
+  update(id: string, data: IUpdateTransactionDTO): Promise<Transaction>;
 }
